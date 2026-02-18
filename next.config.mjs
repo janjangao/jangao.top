@@ -2,7 +2,9 @@ import nextra from 'nextra'
 
 // Set up Nextra with its configuration
 const withNextra = nextra({
+    // static export
     staticImage: false,
+
     search: { codeblocks: false },
     defaultShowCopyCode: true,
     readingTime: true
@@ -10,7 +12,9 @@ const withNextra = nextra({
 
 // Export the final Next.js config with Nextra included
 export default withNextra({
-    output: 'export',
+    // static export
+    output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
+
     turbopack: {
         resolveAlias: {
             // Path to your `mdx-components` file with extension
