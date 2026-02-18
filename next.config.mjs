@@ -14,6 +14,7 @@ const withNextra = nextra({
 export default withNextra({
     // static export
     output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
+    trailingSlash: true,
 
     turbopack: {
         resolveAlias: {
