@@ -2,8 +2,8 @@
   "type": "module",
   "scripts": {
     "dev": "next --turbopack",
-    "build": "next build",
     "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind",
+    "build": "next build",
     "start": "next start"
   },
   "dependencies": {
