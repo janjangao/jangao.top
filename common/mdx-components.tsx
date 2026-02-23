@@ -1,4 +1,5 @@
-import { useMDXComponents as getThemeComponents } from "nextra-theme-blog";
+// import { useMDXComponents as getThemeComponents } from "nextra-theme-blog";
+import { useMDXComponents as getThemeComponents } from 'nextra-theme-docs'
 import Posts from "./component/Posts";
 import Tags from "./component/Tags";
 

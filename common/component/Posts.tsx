@@ -83,7 +83,7 @@ export default async function Posts(
             {showViewAllButton === true &&
                 (
                     <Link
-                        href="/posts"
+                        href={route}
                         className="flex gap-1 items-center hover:underline"
                     >
                         View all posts <IconArrowNarrowRight className="w-4" />

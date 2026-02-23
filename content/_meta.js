@@ -1,9 +1,11 @@
 export default {
-    '*': {
-        type: 'page'
-    },
-    index: {},
-    posts: {
-        title: 'Blog',
+  index: '',
+  'get-started': '',
+  features: '',
+  themes: '',
+  advanced: {
+    theme: {
+      copyPage: false
     }
+  }
 }
