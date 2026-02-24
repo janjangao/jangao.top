@@ -5,7 +5,6 @@ import React from "react";
 import { useTransitionRouter } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 import { Button } from "nextra/components";
-import { IconArrowBack, IconPoint } from "@tabler/icons-react";
 
 import type { WrapperProps } from "./Type";
 
@@ -33,7 +32,6 @@ export function GoBack({ children }: { children: React.ReactNode | string }) {
             onClick={router.back}
             className="hover:underline no-underline flex items-center gap-1"
         >
-            <IconArrowBack className="w-4" />
             {children}
         </Button>
     );
@@ -52,7 +50,6 @@ export default function PhucbmWrapper({ children, metadata }: Props) {
         index === 0
             ? [<React.Fragment key={`item-${index}`}>{item}</React.Fragment>]
             : [
-                <IconPoint key={`sep-${index}`} className="w-3" />,
                 <React.Fragment key={`item-${index}`}>{item}</React.Fragment>,
             ]
     );

@@ -1,5 +1,4 @@
 import { Link } from "next-view-transitions";
-import { IconArrowNarrowRight, IconTags } from "@tabler/icons-react";
 import { getMeta } from "@/common/get-page-meta";
 
 import type { Filter } from "@/common/get-page-meta";
@@ -43,7 +42,6 @@ export default async function Posts(
                                 </Link>
                             </div>
                             <div className="flex gap-1 text-sm">
-                                <IconTags className="w-4 min-w-4 -translate-y-0.5 text-[lab(48.496%_0_0)]" />
                                 <div className="flex flex-wrap gap-x-1">
                                     {post.frontMatter?.tags?.map(
                                         (tagName: string, index: number) => {
@@ -86,7 +84,7 @@ export default async function Posts(
                         href={route}
                         className="flex gap-1 items-center hover:underline"
                     >
-                        View all posts <IconArrowNarrowRight className="w-4" />
+                        View all posts
                     </Link>
                 )}
         </div>

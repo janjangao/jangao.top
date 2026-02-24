@@ -3,42 +3,57 @@ import { generateStaticParamsFor, importPage } from "nextra/pages";
 import type { $NextraMetadata, Heading } from "nextra";
 
 type PageParams = {
-  mdxPath?: string[]
-}
+  [key: string]: string[];
+};
 
 type PageProps = {
-  params: Promise<PageParams>
+  params: Promise<PageParams>;
+};
+
+const IGNORE_PATH_PREFIXES = ["."];
+
+function isIgnoredPath(paths?: string[]) {
+  return (
+    paths &&
+    IGNORE_PATH_PREFIXES.some((prefix) =>
+      paths.some((path) => path.startsWith(prefix)),
+    )
+  );
 }
 
-function withBase(baseSegments: string[], mdxPath?: string[]) {
-  return [...baseSegments, ...(mdxPath ?? [])];
+function parseBase(base: string) {
+  return base.split("/").filter(Boolean);
 }
 
-export function createGenerateStaticParams(baseSegments: string[]) {
-  const gen = generateStaticParamsFor("mdxPath");
+function withBase(bases: string[], paths?: string[]) {
+  return [...bases, ...(paths ?? [])];
+}
+
+export function createGenerateStaticParams(
+  bases: string[],
+  segmentKey: string,
+) {
+  const gen = generateStaticParamsFor(segmentKey);
   return async () => {
     const all = await gen();
-
     return all
       .filter((p: any) => {
-        const segs: string[] = p.mdxPath ?? [];
-        if (segs.length < baseSegments.length) return false;
-        return baseSegments.every((s, i) => segs[i] === s);
+        const segs: string[] = p[segmentKey] ?? [];
+        if (segs.length < bases.length) return false;
+        return bases.every((s, i) => segs[i] === s);
       })
       .map((p: any) => ({
-        mdxPath: (p.mdxPath ?? []).slice(baseSegments.length)
+        [segmentKey]: (p[segmentKey] ?? []).slice(bases.length),
       }));
   };
 }
 
-export function createGenerateMetadata(baseSegments: string[]) {
+export function createGenerateMetadata(bases: string[], segmentKey: string) {
   return async (props: PageProps) => {
     const params = await props.params;
+    if (isIgnoredPath(params[segmentKey])) return null;
 
-    if (baseSegments.length === 0 && params.mdxPath?.[0]?.startsWith('.')) return {}
-
-
-    const { metadata } = await importPage(withBase(baseSegments, params.mdxPath));
+    const { metadata } = await importPage(withBase(bases, params[segmentKey]));
     return metadata;
   };
 }
@@ -48,34 +63,47 @@ export type Wrapper = React.ComponentType<{
   toc?: Heading[];
   metadata?: $NextraMetadata;
   sourceCode?: string;
-}>
+}>;
 
-export function createPage(baseSegments: string[], Wrapper?: Wrapper) {
+export function createPage(
+  bases: string[],
+  segmentKey: string,
+  Wrapper?: Wrapper,
+) {
   return async function Page(props: PageProps) {
     const params = await props.params;
+    if (isIgnoredPath(params[segmentKey])) return null;
 
-    if (baseSegments.length === 0 && params.mdxPath?.[0]?.startsWith('.')) return null;
-
-    const { default: MDXContent, toc, metadata, sourceCode } = await importPage(
-      withBase(baseSegments, params.mdxPath)
-    );
+    const {
+      default: MDXContent,
+      toc,
+      metadata,
+      sourceCode,
+    } = await importPage(withBase(bases, params[segmentKey]));
 
     return Wrapper ? (
       <Wrapper toc={toc} metadata={metadata} sourceCode={sourceCode}>
         <MDXContent {...props} params={params} />
       </Wrapper>
-    ) : <MDXContent {...props} params={params} />;
+    ) : (
+      <MDXContent {...props} params={params} />
+    );
   };
 }
 
-export default function createMdxPathPage(baseSegments: string[], Wrapper?: Wrapper) {
-  const generateStaticParams = createGenerateStaticParams(baseSegments);
-  const generateMetadata = createGenerateMetadata(baseSegments);
-  const Page = createPage(baseSegments, Wrapper);
+export default function createMdxPathPage(
+  base: string,
+  segmentKey: string,
+  Wrapper?: Wrapper,
+) {
+  const bases = parseBase(base);
+  const generateStaticParams = createGenerateStaticParams(bases, segmentKey);
+  const generateMetadata = createGenerateMetadata(bases, segmentKey);
+  const Page = createPage(bases, segmentKey, Wrapper);
 
   return {
     generateStaticParams,
     generateMetadata,
-    Page
-  }
+    Page,
+  };
 }

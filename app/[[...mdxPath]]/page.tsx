@@ -1,10 +1,8 @@
 import createMdxPathPage from "@/common/mdx-path-page";
+import { useMDXComponents } from "@/mdx-components";
 
-import { useMDXComponents as getMDXComponents } from '@/mdx-components'
+const Wrapper = useMDXComponents().wrapper;
 
-const Wrapper = getMDXComponents().wrapper
-
-const BASE: string[] = [];
-
-export const { generateStaticParams, generateMetadata, Page } = createMdxPathPage(BASE, Wrapper);
+export const { generateStaticParams, generateMetadata, Page } =
+  createMdxPathPage("", "mdxPath", Wrapper);
 export default Page;
