@@ -4,7 +4,9 @@
     "dev": "next --turbopack",
     "build": "next build",
     "postbuild": "pagefind --site .next/server/app --output-path out/_pagefind",
-    "start": "next start"
+    "start": "next start",
+    "dev:tw": "npx @tailwindcss/cli -i ./dioxus/demo/tailwind.css -o ./dioxus/demo/assets/tailwind.css --watch",
+    "dev:dx": "cd dioxus/demo && dx serve"
   },
   "dependencies": {
     "@giscus/react": "^3.1.0",
