@@ -19,7 +19,7 @@ const navbar = (
     {/* test */}
   </Navbar>
 );
-const footer = <Footer>MIT {new Date().getFullYear()} © Nextra.</Footer>;
+const footer = <Footer>MIT {new Date().getFullYear()} © janjangao | 浙ICP备19019742号.</Footer>;
 
 export default async function RootLayout({
   children,
