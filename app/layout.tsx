@@ -10,12 +10,14 @@ export const metadata = {
   // For more information on metadata API, see: https://nextjs.org/docs/app/building-your-application/optimizing/metadata
 };
 
-const banner = <Banner storageKey="some-key">Nextra 4.0 is released 🎉</Banner>;
+// const banner = <Banner storageKey="some-key">Nextra 4.0 is released 🎉</Banner>;
 const navbar = (
   <Navbar
     logo={<b>Nextra</b>}
     // ... Your additional navbar options
-  />
+  >
+    {/* test */}
+  </Navbar>
 );
 const footer = <Footer>MIT {new Date().getFullYear()} © Nextra.</Footer>;
 
@@ -40,12 +42,13 @@ export default async function RootLayout({
       </Head>
       <body>
         <Layout
-          banner={banner}
           navbar={navbar}
           pageMap={await getPageMap()}
           docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
           footer={footer}
           // ... Your additional layout options
+          editLink={null}
+          feedback={{ content: null }}
         >
           {children}
         </Layout>

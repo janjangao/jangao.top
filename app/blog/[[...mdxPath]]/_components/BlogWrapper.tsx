@@ -2,7 +2,6 @@
 
 import {
     combineWrapper,
-    PhucbmWrapper,
     createGiscusCommentsWrapper,
 } from "@/common/component/Wrapper/Wrapper";
 
@@ -21,4 +20,4 @@ const GiscusCommentsWrapper = createGiscusCommentsWrapper({
     loading: "lazy",
 });
 
-export default combineWrapper([PhucbmWrapper, GiscusCommentsWrapper]);
+export default combineWrapper([GiscusCommentsWrapper]);

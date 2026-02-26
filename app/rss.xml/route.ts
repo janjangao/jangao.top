@@ -10,5 +10,5 @@ const CONFIG = {
 export const dynamic = 'force-static'
 
 export async function GET() {
-  return getRSSXML('/posts', CONFIG)
+  return getRSSXML('/blog', CONFIG)
 }

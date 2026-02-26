@@ -1,12 +1,11 @@
 export default {
-  index: '',
-  introduction: '',
-  'get-started': '',
-  features: '',
-  themes: '',
-  advanced: {
+  '*': {
+    type: 'page',
     theme: {
       copyPage: false
     }
-  }
+  },
+  index: '',
+  blog: '',
+  note: '',
 }

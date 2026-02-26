@@ -1,5 +1,4 @@
 export * from "./GiscusCommentsWrapper";
-export { default as PhucbmWrapper } from "./PhucbmWrapper";
 
 import type { $NextraMetadata, Heading } from "nextra";
 
