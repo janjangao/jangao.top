@@ -1,5 +1,3 @@
-// import NextraBlogRootLayout from '@/common/component/NextraBlogRootLayout'
-import { ViewTransitions } from "next-view-transitions";
 import { Footer, Layout, Navbar } from "nextra-theme-docs";
 import { Banner, Head } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
@@ -21,9 +19,11 @@ const navbar = (
 );
 const footer = <Footer>MIT {new Date().getFullYear()} © Nextra.</Footer>;
 
-export default async function RootLayout(
-  { children }: { children: React.ReactNode },
-) {
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html
       // Not required, but good for SEO
@@ -34,7 +34,7 @@ export default async function RootLayout(
       suppressHydrationWarning
     >
       <Head
-        // ... Your additional head options
+      // ... Your additional head options
       >
         {/* Your additional tags should be passed as `children` of `<Head>` element */}
       </Head>
@@ -47,15 +47,9 @@ export default async function RootLayout(
           footer={footer}
           // ... Your additional layout options
         >
-          <ViewTransitions>
-            {children}
-          </ViewTransitions>
+          {children}
         </Layout>
       </body>
     </html>
   );
 }
-
-// export default async function RootLayout({ children }: { children: React.ReactNode }) {
-//   return <NextraBlogRootLayout>{children}</NextraBlogRootLayout>
-// }
