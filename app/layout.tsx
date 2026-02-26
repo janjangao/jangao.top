@@ -19,7 +19,20 @@ const navbar = (
     {/* test */}
   </Navbar>
 );
-const footer = <Footer>MIT {new Date().getFullYear()} © janjangao | 浙ICP备19019742号.</Footer>;
+const footer = (
+  <Footer>
+    <abbr
+      title="This site and all its content are licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
+      style={{ cursor: "help" }}
+    >
+      CC BY-NC 4.0
+    </abbr>&nbsp;
+    {new Date().getFullYear()} © janjangao |&nbsp;
+    <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer">
+      浙ICP备19019742号
+    </a>
+  </Footer>
+);
 
 export default async function RootLayout({
   children,
