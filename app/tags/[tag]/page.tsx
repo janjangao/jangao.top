@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { getTags } from "@/common/get-page-meta";
-import Posts from "@/common/component/Posts";
-import Tags from "@/common/component/Tags";
 
 type TagPageParams = {
     tag: string;
@@ -19,7 +17,7 @@ export async function generateMetadata(props: TagPageProps): Promise<Metadata> {
 }
 
 export async function generateStaticParams(): Promise<TagPageParams[]> {
-    const allTags = await getTags("/posts");
+    const allTags = await getTags("/blog");
     return allTags.map((tag) => ({ tag }));
 }
 
@@ -30,10 +28,8 @@ export default async function TagPage(props: TagPageProps) {
     return (
         <>
             <h1>Posts Tagged with &quot;{decodedTag}&quot;</h1>
-            <Posts route="/posts" tags={[decodedTag]} />
 
             <h2>More tags</h2>
-            <Tags route="/posts" />
         </>
     );
 }

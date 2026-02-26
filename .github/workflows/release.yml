@@ -24,7 +24,7 @@ jobs:
         run: npm install
         
       - name: Build project
-        run: npm run build
+        run: SERVER_ENV=static npm run build
         
       - name: Deploy
         uses: bonaysoft/uptoc@v1.4.3

@@ -7,5 +7,8 @@ export default {
   },
   index: '',
   blog: '',
-  note: '',
+  doc: '',
+  note: {
+    display: 'hidden'
+  }
 }

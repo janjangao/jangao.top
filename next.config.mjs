@@ -1,5 +1,27 @@
 import nextra from 'nextra'
 
+const isStatic = process.env.SERVER_ENV === 'static';
+const staticConfig = {
+    output: 'export',
+    images: {
+        unoptimized: true
+    },
+}
+const ssrConfig = {
+    async rewrites() {
+        return [
+            {
+                source: '/:path*/index.html',
+                destination: '/:path*',
+            },
+            {
+                source: '/:path*/index.html',
+                destination: '/:path*/',
+            },
+        ]
+    },
+}
+
 const withNextra = nextra({
     staticImage: false,
     search: { codeblocks: false },
@@ -8,12 +30,8 @@ const withNextra = nextra({
 })
 
 export default withNextra({
-    output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
-    images: {
-        unoptimized: true
-    },
+    ...(isStatic ? staticConfig : ssrConfig),
     trailingSlash: true,
-
     turbopack: {
         resolveAlias: {
             // Path to your `mdx-components` file with extension
