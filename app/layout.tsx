@@ -29,7 +29,7 @@ const footer = (
     </abbr>&nbsp;
     {new Date().getFullYear()} © janjangao |&nbsp;
     <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer">
-      浙ICP备19019742号
+      浙ICP备19019742号-2
     </a>
   </Footer>
 );
